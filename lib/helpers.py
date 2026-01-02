@@ -1,93 +1,25 @@
-# Helper functions
-
-def helper_function_5(x):
-    """Helper function for iteration 5."""
-    return x * 5
-
-def format_output(data):
-    """Format output data."""
-    return str(data).upper()
-
-def sanitize_input(input_str):
-    """Sanitize user input."""
-    if not isinstance(input_str, str):
-        return str(input_str)
-    return input_str.strip().replace("\n", "").replace("\r", "")
-
-
-# Helper functions
-
-def helper_function_29(x):
-    """Helper function for iteration 29."""
-    return x * 29
-
-def format_output(data):
-    """Format output data."""
-    return str(data).upper()
-
-def sanitize_input(input_str):
-    """Sanitize user input."""
-    if not isinstance(input_str, str):
-        return str(input_str)
-    return input_str.strip().replace("\n", "").replace("\r", "")
-
-
-# Helper functions
-
-def helper_function_59(x):
-    """Helper function for iteration 59."""
-    return x * 59
-
-def format_output(data):
-    """Format output data."""
-    return str(data).upper()
-
-def sanitize_input(input_str):
-    """Sanitize user input."""
-    if not isinstance(input_str, str):
-        return str(input_str)
-    return input_str.strip().replace("\n", "").replace("\r", "")
-
-
-# Helper functions
-
-def helper_function_65(x):
-    """Helper function for iteration 65."""
-    return x * 65
-
-def format_output(data):
-    """Format output data."""
-    return str(data).upper()
-
-def sanitize_input(input_str):
-    """Sanitize user input."""
-    if not isinstance(input_str, str):
-        return str(input_str)
-    return input_str.strip().replace("\n", "").replace("\r", "")
-
-
 """
-Potential Chainsaw - Code Refactoring
+Potential Chainsaw - Performance Improvement
 """
 
-from typing import List, Dict, Optional
+import logging
+from functools import lru_cache
 
-def optimize_algorithm(data: List[Dict]) -> List[Dict]:
-    """Optimized version with better performance"""
-    # Use list comprehension for better performance
-    return [
-        {**item, 'processed': True}
-        for item in data
-        if item.get('active', True)
-    ]
+logger = logging.getLogger(__name__)
 
-def extract_metadata(obj: Dict) -> Optional[Dict]:
-    """Extract metadata with type hints"""
-    if not isinstance(obj, dict):
-        return None
-    
-    return {
-        'id': obj.get('id'),
-        'timestamp': obj.get('timestamp'),
-        'version': obj.get('version', '1.0.0')
-    }
+@lru_cache(maxsize=128)
+def cached_computation(value):
+    """Cached computation for better performance"""
+    logger.debug(f"Computing value: {value}")
+    # Complex computation here
+    return value ** 2
+
+def batch_process(items, batch_size=100):
+    """Process items in batches for better memory usage"""
+    for i in range(0, len(items), batch_size):
+        batch = items[i:i + batch_size]
+        yield process_batch(batch)
+
+def process_batch(batch):
+    """Process a single batch"""
+    return [item.upper() for item in batch]
